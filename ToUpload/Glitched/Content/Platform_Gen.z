@@ -1,0 +1,19 @@
+class Platform_Gen : ZilchComponent
+{
+    [Property]
+    var Platform : Archetype;
+    
+    function Initialize(init : CogInitializer)
+    {
+        for (var objcount = 0; objcount <=10; objcount+=1)
+        {
+         var temploc = 
+         var tempPlatform = this.Space.CreateAtPosition(this.Platform, );
+        }
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+}

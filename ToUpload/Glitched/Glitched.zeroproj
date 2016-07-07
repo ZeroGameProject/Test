@@ -1,0 +1,29 @@
+Cog = 
+{
+	Project = 
+	{
+		string ProjectName = "Glitched",
+		string ProjectOwner = "",
+		string DefaultLevel = "Level",
+		string ProjectSpace = "Space",
+		string ProjectFolder = "E:\Glitched",
+		uint ProjectEngineRevision = 13602,
+		bool AutoTakeProjectScreenshot = true,
+		uint64 Guid = 571d6ca488c3b893,
+	},
+	EditorSettings = 
+	{
+		EditorMode EditorMode = Mode2D,
+		bool ViewCube = true,
+		float ViewCubeViewportSize = 150,
+		ScriptReloadMethod ScriptReloadEditor = ReInitializeObjects,
+		ScriptReloadMethod ScriptReloadGame = PatchObjects,
+		bool AutoUpdateContentChanges = true,
+	},
+	ProjectDescription = 
+	{
+		string ShortDescription = "",
+		string LongDescription = "",
+		string Tags = "",
+	},
+},
