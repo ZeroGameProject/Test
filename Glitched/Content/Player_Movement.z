@@ -1,0 +1,84 @@
+class Player_Movement : ZilchComponent
+{
+    [Property]
+    var Speed : Real = 3.0;
+    [Property]
+    var Bullet : Archetype;
+    var Jump : Boolean;
+    function Initialize(init : CogInitializer)
+    {
+    
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+        Zero.Connect(this.Owner, Events.CollisionEnded, this.OnCollisionEnded);
+    }
+
+    function OnCollisionEnded(event : CollisionEvent)
+    {
+        this.Jump = true;
+        var temp = event.OtherObject;
+        if(temp.Name.Contains("Platform"))
+        {
+        this.Speed = 0.1;
+        Console.WriteLine("slow");
+        }
+    }
+
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        this.Jump = false;
+        var temp = event.OtherObject;
+        if (temp.ArchetypeName == "enemy1")
+        {
+            Console.WriteLine("test");
+        }
+        var temp1 = event.OtherObject;
+        if(temp.Name.Contains("Platform"))
+        {
+            this.Speed = 0.2;
+            Console.WriteLine("fast");
+        
+
+        }
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+         /*if(Zero.Keyboard.KeyIsReleased(Keys.Space)){
+            Console.WriteLine("Silly");
+            
+            var a = new Real2(10,0);
+            //obj.RigidBody.Velocity.Set.Real2x2(a);
+            var rng = Random();
+            Console.WriteLine(rng);
+            var randomNum = rng.DieRoll(20);
+            Console.WriteLine(randomNum);
+            
+        }*/
+            var obj = this.Owner;
+            //var a = new Real3(Real 1, Real 3,Real 4);
+            //obj.RigidBody.ApplyLinearVelocity( 1,2,0 : Real3);
+            if(Zero.Keyboard.KeyIsDown(Keys.A))
+            {
+                obj.RigidBody.Velocity = obj.RigidBody.Velocity + Real3(-100,0,0) * event.Dt * this.Speed;
+            }
+            if(Zero.Keyboard.KeyIsDown(Keys.D))
+            {
+                obj.RigidBody.Velocity = obj.RigidBody.Velocity + Real3(100,0,0) * event.Dt * this.Speed;
+            }
+            
+            if(Zero.Keyboard.KeyIsDown(Keys.E))
+            {
+            var speedtemp = this.Owner.RigidBody.Velocity;
+            var stuff = speedtemp * 2;
+            var newBullet = this.Space.CreateAtPosition(this.Bullet, obj.Transform.Translation);
+            newBullet.RigidBody.Velocity = stuff;
+        }
+            if(Zero.Keyboard.KeyIsDown(Keys.Space) && this.Jump == false){
+                obj.RigidBody.Velocity = Real3(obj.RigidBody.Velocity.X,10,0);
+        }
+            
+            
+     
+    }
+}

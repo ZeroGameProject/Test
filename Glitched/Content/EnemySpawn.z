@@ -1,0 +1,24 @@
+class EnemySpawn : ZilchComponent
+{
+    [Property]
+    var Enemy1 : Archetype;
+    var Timer : Real = 0;
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Timer += event.Dt;
+        if (this.Timer >= 2.0) {
+            var xrng = Random();
+            var xloc =xrng.Range(-10, 10);
+            var yrng = Random();
+            var yloc =yrng.Range(10, 20);
+            var abc = Real3(xloc, yloc, 0);
+            var enemy = this.Space.CreateAtPosition(this.Enemy1, abc);
+            this.Timer = 0;
+        }
+    }
+}

@@ -1,0 +1,44 @@
+class Move : ZilchComponent
+{
+    var Start : Real3;
+    var Second : Real3;
+    var Forward : Boolean;
+    var Active : Boolean;
+    var Back : Boolean;
+    var Move : Real;
+    function Initialize(init : CogInitializer)
+    {
+        this.Start = this.Owner.Transform.Translation;
+        var temp = Real (this.Owner.Transform.Translation.X + 10);
+        this.Second = Real3(temp, this.Owner.Transform.Translation.Y, 0);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.Forward = true;
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if (this.Active == true) 
+        {
+            this.Owner.Transform.Translation = Real3(this.Owner.Transform.Translation.X + this.Move, this.Owner.Transform.Translation.Y, 0);
+        if (this.Forward == true)
+        {
+            this.Move = 0.02;
+    }
+        if (this.Back == true)
+    {
+        this.Move = -0.02;
+        
+    }
+    if (this.Owner.Transform.Translation.X <= this.Second.X)
+    {
+        this.Forward = false;
+        this.Back = true;
+    }
+    if (this.Owner.Transform.Translation.X >= this.Start.X)
+    {
+        this.Forward = true;
+        this.Back = false;
+    }
+    }
+}
+}

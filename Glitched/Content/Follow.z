@@ -1,0 +1,15 @@
+class Follow : ZilchComponent
+{
+     var TargetObject : Cog = null;
+    function Initialize(init : CogInitializer)
+    {
+        this.TargetObject = this.Space.FindObjectByName("player");
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var location = Real3(this.TargetObject.Transform.Translation.X, this.TargetObject.Transform.Translation.Y, 40);
+        this.Owner.Transform.Translation = location;
+    }
+}
