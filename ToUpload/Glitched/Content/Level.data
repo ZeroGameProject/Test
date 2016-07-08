@@ -22,8 +22,8 @@ Level =
 		{
 			bool Active = true,
 			bool WakeUpOnChange = false,
-			float Drag = 0.699999988,
-			float AngularDrag = 0.100000001,
+			float Drag = 0.800000012,
+			float AngularDrag = 0.5,
 		},
 		CameraViewport = 
 		{
@@ -104,7 +104,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-0.400535017, 1.22218394, 50],
+			Vec3 Translation = [-4.60931587, 4.60208559, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -116,7 +116,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 9.93171787,
+			float Size = 24.6597424,
 		},
 		EditorCameraController = 
 		{
@@ -124,7 +124,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [-0.400535017, 1.22218394, 4.80801852e-08],
+			Vec3 LookTarget = [-4.60931587, 4.60208559, -1.35891497e-07],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -167,6 +167,9 @@ Level =
 			bool Active = true,
 			float Volume = 1,
 		},
+		Follow = 
+		{
+		},
 	},
 	Cog = 
 	{
@@ -176,7 +179,7 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "Player",
+			string Name = "player",
 		},
 		Transform = 
 		{
@@ -192,9 +195,9 @@ Level =
 			bool CastShadows = false,
 			Vec4 Color = [1, 1, 1, 1],
 			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
+			SpriteGeometryMode GeometryMode = ViewPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5274db4c2e7c11f9:Circle",
+			string SpriteSource = "57982b22eb8a1e3c:Character",
 			bool RenderMask = false,
 			bool FlipX = false,
 			bool FlipY = false,
@@ -219,11 +222,11 @@ Level =
 			float Speed = 0.300000012,
 			string Bullet = "571d7b2be400c6cc:Spitball",
 		},
-		EnemySpawn = 
+		Platform_Gen = 
 		{
-			string Enemy1 = "571d8aa299e7ca17:enemy1",
+			string Platform = "57bf0f5c46487e1f:Platform",
 		},
-		SphereCollider = 
+		BoxCollider = 
 		{
 			bool Ghost = false,
 			bool SendsMessages = true,
@@ -231,11 +234,7 @@ Level =
 			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
 			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
 			Vec3 Offset = [0, 0, 0],
-			float Radius = 0.5,
-		},
-		Platform_Gen = 
-		{
-			string Platform = "57bf0f5c46487e1f:Platform",
+			Vec3 Size = [0.75, 1, 0.5],
 		},
 	},
 	Cog = 
@@ -246,16 +245,12 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "Platform1",
-		},
-		Archetyped = 
-		{
-			string Name = "4faa6050b86884ec:DefaultArchetype",
+			string Name = "Cube",
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 0, 0],
-			Vec3 Scale = [5, 1, 1],
+			Vec3 Translation = [0, -10.5, 0],
+			Vec3 Scale = [10000, 20, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Model = 
@@ -264,9 +259,21 @@ Level =
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = true,
-			string MaterialName = "4de020863e85bb61:DefaultMaterial",
+			string MaterialName = "578c4bb8d198d27c:Water",
 			string MeshName = "4de0354322b345ae:Cube",
 			Vec4 Color = [1, 1, 1, 1],
+		},
+		RigidBody = 
+		{
+			bool Static = true,
+			bool Asleep = false,
+			bool Kinematic = false,
+			bool RotationLocked = false,
+			bool Mode2D = true,
+			bool AllowSleep = true,
+			bool Inherit2DMode = true,
+			Vec3 Velocity = [0, 0, 0],
+			Vec3 AngularVelocity = [0, 0, 0],
 		},
 		BoxCollider = 
 		{
@@ -277,6 +284,24 @@ Level =
 			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
 			Vec3 Offset = [0, 0, 0],
 			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+	},
+	ArchetypeInstance = 
+	{
+		string Name = "57bf0f5c46487e1f:Platform",
+		LinkId = 
+		{
+			uint Id = 6,
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-5.18546534, 5.88212585, 0],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Named = 
+		{
+			string Name = "Cube",
 		},
 	},
 },

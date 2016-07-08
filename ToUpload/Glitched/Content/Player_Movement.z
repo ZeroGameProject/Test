@@ -35,8 +35,9 @@ class Player_Movement : ZilchComponent
         var temp1 = event.OtherObject;
         if(temp.Name.Contains("Platform"))
         {
-            this.Speed = 0.3;
+            this.Speed = 0.2;
             Console.WriteLine("fast");
+        
 
         }
     }
@@ -54,31 +55,21 @@ class Player_Movement : ZilchComponent
             Console.WriteLine(randomNum);
             
         }*/
+            this.Owner.Transform.Rotation = Quaternion(0,0,0,0);
             var obj = this.Owner;
             //var a = new Real3(Real 1, Real 3,Real 4);
             //obj.RigidBody.ApplyLinearVelocity( 1,2,0 : Real3);
             if(Zero.Keyboard.KeyIsDown(Keys.A))
             {
                 obj.RigidBody.Velocity = obj.RigidBody.Velocity + Real3(-100,0,0) * event.Dt * this.Speed;
-                Console.WriteLine("Sillys");
+                this.Owner.Sprite.FlipX = true;
             }
             if(Zero.Keyboard.KeyIsDown(Keys.D))
             {
                 obj.RigidBody.Velocity = obj.RigidBody.Velocity + Real3(100,0,0) * event.Dt * this.Speed;
-                Console.WriteLine("Sillys");
+                this.Owner.Sprite.FlipX = false;
             }
             
-            if(Zero.Keyboard.KeyIsDown(Keys.W))
-            {
-                obj.RigidBody.Velocity = obj.RigidBody.Velocity + Real3(0,100,0) * event.Dt * this.Speed;
-                Console.WriteLine("Sillys");
-            }
-            
-            if(Zero.Keyboard.KeyIsDown(Keys.S))
-            {
-                obj.RigidBody.Velocity = obj.RigidBody.Velocity + Real3(0,-100,0) * event.Dt * this.Speed;
-                Console.WriteLine("Sillys");
-            }
             if(Zero.Keyboard.KeyIsDown(Keys.E))
             {
             var speedtemp = this.Owner.RigidBody.Velocity;

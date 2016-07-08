@@ -8,9 +8,13 @@ Cog =
 	{
 		string Name = "Cube",
 	},
+	Archetyped = 
+	{
+		string Name = "57bf0f5c46487e1f:Platform",
+	},
 	Transform = 
 	{
-		Vec3 Translation = [0, 0, 0],
+		Vec3 Translation = [-5.18546534, 5.88212585, 0],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -20,7 +24,7 @@ Cog =
 		bool VisibilityCulling = true,
 		bool VisibilityEvents = true,
 		bool CastShadows = true,
-		string MaterialName = "4de020863e85bb61:DefaultMaterial",
+		string MaterialName = "5741d923be15eaf9:Mossy2",
 		string MeshName = "4de0354322b345ae:Cube",
 		Vec4 Color = [1, 1, 1, 1],
 	},
@@ -45,5 +49,8 @@ Cog =
 		string SerializedGroupName = "4e740859314e5515:DefaultGroup",
 		Vec3 Offset = [0, 0, 0],
 		Vec3 Size = [0.5, 0.5, 0.5],
+	},
+	Move = 
+	{
 	},
 },
