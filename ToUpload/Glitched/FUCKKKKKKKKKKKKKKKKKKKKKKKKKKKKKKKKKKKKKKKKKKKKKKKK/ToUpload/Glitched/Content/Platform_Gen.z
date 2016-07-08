@@ -1,0 +1,117 @@
+class Platform_Gen : ZilchComponent
+{
+    [Property]
+    var Platform : Archetype;
+    var ObjLocation : Real3;
+    var Heightvariation : Real;
+    var End_Cube : Real;
+    var Up : Real;
+    var Add : Integer;
+    var Length : Integer;
+    var Gap : Integer;
+    var First : Boolean;
+    var Temp : Integer;
+    var Move_add : Boolean;
+    var Sec : Boolean;
+    function Initialize(init : CogInitializer)
+    {
+        this.Move_add = false;
+        this.First = true;
+        this.Length = 5;
+        this.Gap = 3;
+        for (var objcount = 0; objcount <=100; objcount+=1)
+        {
+            Console.WriteLine(this.Gap);
+            //Random Variations in Terrain
+            var rng = Random();
+            var weird = rng.Range(0, 1);
+            if (weird > 0.6)
+            {
+                this.Up += 1;
+            }
+            else
+            {
+                this.Up -=1;
+                if (this.Up < 0){
+                    this.Up +=1;
+                }
+            }
+            var rng1 = Random();
+            var weird1 = rng.Range(0, 1);
+            if (weird1 < 0.5)
+            {
+                this.Length = this.Length + 1;
+            }
+            else
+            {
+                this.Length = this.Length - 1;
+            }
+            var rng2 = Random();
+            var weird2 = rng.DieRoll(2);
+            if (weird2 < 1)
+            {
+                this.Gap += 1;
+            }
+            else
+            {
+                this.Gap -=1;
+            }
+            //Prevent Out of Bounds
+            if (this.Length >=6)
+            {
+               this.Length = this.Length - 1;
+            }
+            else if (this.Length < 4)
+            {
+                this.Length = this.Length + 1;
+            }   
+            if (this.Gap >= 5 )
+            {
+                this.Gap = 2;
+            }
+            if (this.Gap <= 1)
+             {
+                this.Gap = 2;
+        }
+         //Assigning and creating object with variations
+         var temploc = (this.ObjLocation);
+         var tempPlatform = this.Space.Create(this.Platform);
+         tempPlatform.Transform.Scale = Real3(this.Length, 1, 0);
+         Console.WriteLine(this.Length);
+         var rng3 = Random();
+            var weird3 = rng.Range(0, 1);
+           if (weird3 < 0.05)
+        {
+            if (this.First == false)
+            {
+                tempPlatform.Move.Active = true;
+                this.Move_add = true;
+                this.Add += 5;
+            }
+            else 
+            {
+                tempPlatform.Move.Active = false;
+            }
+        }
+         tempPlatform.Transform.Translation = temploc;
+         tempPlatform.Model.Material.TextureDiffuse.DiffuseTiling = Real2(this.Length, 1);
+         tempPlatform.RigidBody.Static = true;
+         if (this.First == true)
+         {
+             this.Temp = 0;
+             this.First = false;
+             tempPlatform.Move.Active = false;
+         }
+    
+         this.ObjLocation= Real3(this.End_Cube + this.Gap + this.Length/2 + this.Add + this.Temp, this.Up * 3, 0);
+         tempPlatform.Name = ("Platform");
+         this.End_Cube = this.End_Cube + this.Gap + this.Length + this.Add;
+         this.Add =  0;
+        }
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+}

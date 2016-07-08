@@ -1,0 +1,7 @@
+ContentLibrary = 
+{
+	string Name = "Glitched",
+	uint64 LibraryId = 571d6cbf8ffc78bd,
+	string SourceControlType = "",
+	bool ReadOnly = false,
+},
